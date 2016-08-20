@@ -1,0 +1,4 @@
+#! /bin/bash
+export DISPLAY=:0
+play /usr/share/sounds/Oxygen-Sys-App-Error-Critical.ogg > /dev/null 2>&1 &
+kdialog --passivepopup "The battery is too low to begin backup. Charge remaining: $battlevel% Will attempt again in 5 minutes." "5"

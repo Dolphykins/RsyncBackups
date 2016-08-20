@@ -1,0 +1,26 @@
+#! /bin/bash
+
+# Personal use script by Dillon McCaig.
+# Checks the battery level and the charging state. If the battery is below 20% it will fail and retry in 5 minutes.
+# If the battery is above 20%, charging, or fully charged, the rsync backup script is called to backup the laptop.
+
+# Known bug: The script will run for 10 minutes instead of 5, since the sleep 300 is on the end. Will fix it sometime, maybe, dunno.
+
+for n in {1..2};
+	do
+		unset ischarging
+
+		ischarging=$(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -w "    state:               charging" \
+		&& upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -w "    state:               fully-charged")
+
+		battlevel=$(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep percentage | grep -Eo '[0-9]{1,4}')
+
+		if [ $battlevel -gt 20 ] || [ -n "$ischarging" ];
+			then
+				printf "Battery charge at sync time: $battlevel%% \n$ischarging \n\n" >> /var/log/rsync-backup.log
+				sh /home/dolphy/rsync-backup
+			else
+				sh /home/dolphy/battcheck-low
+				sleep 300
+		fi;
+done

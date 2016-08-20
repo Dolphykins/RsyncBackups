@@ -1,0 +1,27 @@
+rsync -e 'ssh -p 22' -arvP \
+--exclude ".*" \
+--exclude "Android" \
+--exclude "Dropbox" \
+--exclude "dispad" \
+--exclude "Games" \
+--exclude "Steam" \
+--exclude "VirtualBox VMs" \
+--exclude "Documents/Default" \
+--exclude "Documents/Profile*" \
+--exclude "Downloads/Second_Life*" \
+--exclude "Downloads/ffmpeg*" \
+--exclude "Downloads/reaver*" \
+--exclude "Downloads/synergy*" \
+--exclude "Downloads/The Kings Bounty*" \
+--exclude "*.iso" \
+--exclude "plpbt*" \
+--exclude "Downloads/iOS*" \
+--exclude "Downloads/slowloris*" \
+--exclude "Downloads/maldetect*" \
+--exclude "Downloads/indicator-cpufreq*" \
+--exclude "Downloads/fwbackup*" \
+--exclude "afc:" \
+--exclude "jre*" \
+--include "*" \
+/home/dolphy dolphy@192.168.0.3:/mnt/FISHTANK/ >> /var/log/rsync-backup.log && date >> /var/log/rsync-backup.log && printf "\n ==================== \n\n" >> /var/log/rsync-backup.log
+sh /home/dolphy/battcheck-ok
