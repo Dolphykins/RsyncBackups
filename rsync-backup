@@ -1,3 +1,8 @@
+#! /bin/bash
+# Rsync script that runs when the battery level is OK.
+# Utilizes SSH Key Authentication, make sure that's set up or this won't be very automatic.
+# Logging information is output to "/var/log/rsync-backup.log", needs to be created first (I think)
+
 rsync -e 'ssh -p 22' -arvP \
 --exclude ".*" \
 --exclude "Android" \
