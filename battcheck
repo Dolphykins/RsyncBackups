@@ -1,6 +1,7 @@
 #! /bin/bash
 
 # Personal use script by Dillon McCaig.
+# This script is scheduled by Cron. It is used to automate Rsync backups with a safe battery level to perform them.
 # Checks the battery level and the charging state. If the battery is below 20% it will fail and retry in 5 minutes.
 # If the battery is above 20%, charging, or fully charged, the rsync backup script is called to backup the laptop.
 
